@@ -42,12 +42,13 @@ int calculate_coefficients(double dots[][size_of_dimentions], double *arr_of_coe
 
     /* Создание подсчитывающего массива. Именно в нем мы будем заменять столбцы на arr_Y */
     double arr_count[number_of_dots][number_of_dots];
-    for (int i = 0; i < number_of_dots; ++i) {
+    int i;
+    for (i = 0; i < number_of_dots; ++i) {
         memcpy(arr_count[i], arr_X[i], number_of_dots * sizeof(double));
     }
 
     /* Последовательно считаем корни матричного уравнения */
-    for (int i = 0; i < number_of_dots; ++i) {
+    for (i = 0; i < number_of_dots; ++i) {
 
         memcpy(arr_count[i], arr_Y, number_of_dots * sizeof(double));
 
@@ -118,7 +119,8 @@ int input_dots(FILE *inpt, double arr_of_dots[][size_of_dimentions]) {
     if(!inpt) return 1;
     if (!arr_of_dots) return 1; // Если NULL, значит ошибка: выходим из функции
     double buff = 0;
-    for (int i = 0; i < 3; i++) {
+    int i;
+    for (i = 0; i < 3; i++) {
         printf("Введите координты точек x%d и y%d: ", i + 1, i + 1);
         if (!input_number(inpt, &buff)) { // Читаем в буфер и сразу же проверяем, был ли корректен ввод
             arr_of_dots[i][0] = buff;
