@@ -1,4 +1,3 @@
-dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr
 sudo:     required  # используем Virtual Machine
 
 language: cpp
@@ -31,7 +30,7 @@ script:
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
     - gcovr -r ../ -e '..*/gtest/'
     - cd ../src
-    - cppcheck --inconclusive --enable=all --language=c <file.c> main.c task_one.c
+    - cppcheck --inconclusive --enable=all --language=c main.c task_one.c
 
 deploy:
     # выкладываем tagged-коммиты на GitHub Releases:
