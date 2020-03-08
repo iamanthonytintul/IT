@@ -44,8 +44,10 @@ script:
     - cmake ..
     - make
     - ctest
-    - valgrind ctest
-    - gcov ctest
+    - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
+    - gcovr -r ../ -e '..*/gtest/'
+    - cd ../src
+    - cppcheck --inconclusive --enable=all --language=c <file.c> main.c task_one.c
 
 deploy:
     # выкладываем tagged-коммиты на GitHub Releases:
