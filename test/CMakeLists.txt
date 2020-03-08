@@ -11,7 +11,7 @@ set(CMAKE_EXE_LINKER_FLAGS "--coverage")
 foreach(file ${tests})
     set(name)
     get_filename_component(name ${file} NAME_WE)
-    add_compile_options(-fprofile-arcs -ftest-coverage)
+    set(CMAKE_CXX_FLAGS "--coverage")
     add_executable("${name}_tests"
             ${sources}
             ${file}

@@ -22,7 +22,7 @@ add_subdirectory(test)
 ### Source definitions ###
 ##
 
-add_compile_options(-fprofile-arcs -ftest-coverage)
+set(CMAKE_CXX_FLAGS "--coverage")
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 file(GLOB sources

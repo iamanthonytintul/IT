@@ -1,2 +1,0 @@
-/home/anthonytintul/CLionProjects/ParkMailRuIZ1/test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/anthonytintul/CLionProjects/ParkMailRuIZ1/test/cmake-build-debug/CMakeFiles/edit_cache.dir
