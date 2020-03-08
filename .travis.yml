@@ -44,6 +44,8 @@ script:
     - cmake ..
     - make
     - ctest
+    - valgrind ctest
+    - gcov ctest
 
 deploy:
     # выкладываем tagged-коммиты на GitHub Releases:
