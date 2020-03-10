@@ -22,12 +22,15 @@ install:
 
 script:
     # скрипт сборки и тестирования проекта:
+    - export CXX=/usr/bin/g++-7
+    - export C=/usr/bin/gcc-7
     - mkdir build
     - cd build
     - cmake ..
     - make
     - ctest
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
-    - gcovr -r ../ -e '..*/gtest/'
     - cd ../src
     - cppcheck --inconclusive --enable=all --language=c main.c task_one.c
+    - sbt clean coverage test
+after_success: "sbt coveralls"
