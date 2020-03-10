@@ -152,7 +152,8 @@ int read_number(FILE *input_stream, double *inputNumber) {
     int read_correct_chars = 0;
     double real_counter = 0.1;
 
-    while (input_char = fgetc(input_stream), input_char != ' ' && input_char != EOF && input_char != '\n') {
+    input_char = fgetc(input_stream);
+    while (input_char != ' ' && input_char != EOF && input_char != '\n') {
         if (is_negative(read_correct_chars, input_char)) {
 
             is_negative_number++;
@@ -184,6 +185,7 @@ int read_number(FILE *input_stream, double *inputNumber) {
             }
             read_correct_chars++;
         }
+        input_char = fgetc(input_stream);
     }
     if (!read_correct_chars) {
         do {
