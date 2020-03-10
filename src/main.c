@@ -1,19 +1,15 @@
-#include "../inlcude/task_one.h"
-#include "stdio.h"
+#include "task_one.h"
 
 int main() {
-    double arr_of_coefficients[number_of_coef];
-    double arr_of_dots[number_of_dots][size_of_dimentions];
-    FILE* inpt = stdin;
-    if(input_dots(inpt, arr_of_dots)) {
-        printf("Ошибка чтения. Повторите");
-        return -1;
+    double arr_of_coefficients[NUMBER_OF_COEF] = {0};
+    double arr_of_dots[NUMBER_OF_DOTS][SIZE_OF_DIMENSIONS] = {0};
+    FILE* input_stream = stdin;
+    if(!read_dots(input_stream, arr_of_dots)) {
+        return ERROR;
     }
-    if (calculate_coefficients(arr_of_dots, arr_of_coefficients)) {
-        printf("Невозможно провести через три точки квадратичную функцию\n");
-    } else {
-        printf("a = %lf\nb = %lf\nc = %lf\n", arr_of_coefficients[0], arr_of_coefficients[1],
-               arr_of_coefficients[2]);
+    if (!calculate_coefficients(arr_of_dots, arr_of_coefficients)) {
+        return ERROR;
     }
-    return 0;
+    
+    return SUCCESS;
 }

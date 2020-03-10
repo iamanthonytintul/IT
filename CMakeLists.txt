@@ -21,10 +21,10 @@ add_subdirectory(test)
 ##
 ### Source definitions ###
 ##
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
 
-set(CMAKE_CXX_FLAGS "--coverage")
-
-include_directories("${PROJECT_SOURCE_DIR}/include")
+include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB sources
         "${PROJECT_SOURCE_DIR}/include/*.h"
         "${PROJECT_SOURCE_DIR}/src/*.c")

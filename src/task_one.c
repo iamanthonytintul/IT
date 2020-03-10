@@ -8,128 +8,221 @@
  * функцией через дополнительные параметры.
  * */
 
-#include <stdio.h>
 #include <math.h>
 #include <string.h>
-#include "../inlcude/task_one.h"
+#include "task_one.h"
 
-int find_determinant_3(double array[][number_of_dots], double* det) {    // Поиск определителя матрицы 3*3 методом треугольника
-    if(!array) return 1; // Если NULL, значит ошибка: выходим из функции
-    if(!det) return 1; // Если NULL, значит ошибка: выходим из функции
+int is_negative(int read_chars, int input_char);
+int set_arr_of_x_coordinates(double arr_of_x_coordinates[][NUMBER_OF_DOTS], double dots[][SIZE_OF_DIMENSIONS]);
+int set_arr_of_y_coordinates(double arr_of_y_coordinates[], double dots[][SIZE_OF_DIMENSIONS]);
+int change_column_to_row_of_arrays(double in_arr[][NUMBER_OF_DOTS], double out_of_arr[], int number_of_column);
+int copy_array(double in_arr[][NUMBER_OF_DOTS], double out_of_arr[][NUMBER_OF_DOTS]);
+int is_negative(int read_chars, int input_char);
+int is_fractional(int fraction_flag, int input_char);
+int is_digit(int input_char);
+
+int find_determinant(double array[][NUMBER_OF_DOTS],
+                     double *det) {    /* Поиск определителя матрицы 3*3 методом треугольника */
+    if (!array)
+        return FALSE;
+    if (!det)
+        return FALSE;
     *det += array[1][1] * (array[0][0] * array[2][2] - array[0][2] * array[2][0]);
     *det += array[0][1] * (array[2][0] * array[1][2] - array[2][2] * array[1][0]);
     *det += array[2][1] * (array[0][2] * array[1][0] - array[0][0] * array[1][2]);
-    return 0;
+    return TRUE;
 }
-int calculate_coefficients(double dots[][size_of_dimentions], double *arr_of_coefficients) {
 
-    if(!arr_of_coefficients) return 1; // Если NULL, значит ошибка: выходим из функции
-    if(!dots) return 1; // Если NULL, значит ошибка: выходим из функции
+int set_arr_of_x_coordinates(double arr_of_x_coordinates[][NUMBER_OF_DOTS], double dots[][SIZE_OF_DIMENSIONS]) {
+    if (!arr_of_x_coordinates)
+        return FALSE;
+    if (!dots)
+        return FALSE;
 
-    /* Транспонированная матрица значений X. В дальнейшем поможет проще заменять столбцы матрицы */
-    double arr_X[number_of_dots][number_of_dots] = {{dots[0][0]*dots[0][0], dots[1][0]*dots[1][0], dots[2][0]*dots[2][0]},
-                                                    {dots[0][0],         dots[1][0],         dots[2][0]},
-                                                    {1,                  1,                  1}};
-    /* Матрица-столбец значений Y */
-    double arr_Y[number_of_dots] = {dots[0][1], dots[1][1], dots[2][1]};
-
-    /* Поиск определителя исходной матрицы и проверки на валидность и на равенство нулю. В таком случае решения задачи нет */
-    double det_of_init_arr_X;
-    if(find_determinant_3(arr_X, &det_of_init_arr_X)) return 1;
-    if (fabs(det_of_init_arr_X) < EPS) {
-        return 1;
+    for (int i = 0; i < NUMBER_OF_DOTS; ++i) {
+        arr_of_x_coordinates[i][COEF_A] = dots[i][X_COORDINATE] * dots[i][X_COORDINATE];
+        arr_of_x_coordinates[i][COEF_B] = dots[i][X_COORDINATE];
+        arr_of_x_coordinates[i][COEF_C] = 1;
     }
+    return TRUE;
+}
 
-    /* Создание подсчитывающего массива. Именно в нем мы будем заменять столбцы на arr_Y */
-    double arr_count[number_of_dots][number_of_dots];
-    int i;
-    for (i = 0; i < number_of_dots; ++i) {
-        memcpy(arr_count[i], arr_X[i], number_of_dots * sizeof(double));
+int set_arr_of_y_coordinates(double arr_of_y_coordinates[], double dots[][SIZE_OF_DIMENSIONS]) {
+    if (!arr_of_y_coordinates)
+        return FALSE;
+    if (!dots)
+        return FALSE;
+    arr_of_y_coordinates[FIRST_DOT] = dots[FIRST_DOT][Y_COORDINATE];
+    arr_of_y_coordinates[SECOND_DOT] = dots[SECOND_DOT][Y_COORDINATE];
+    arr_of_y_coordinates[THIRD_DOT] = dots[THIRD_DOT][Y_COORDINATE];
+
+    return TRUE;
+}
+
+int change_column_to_row_of_arrays(double in_arr[][NUMBER_OF_DOTS],
+                                   double out_of_arr[], int number_of_column) {
+    if (!in_arr)
+        return FALSE;
+    if (!out_of_arr)
+        return FALSE;
+
+    for (int i = 0; i < NUMBER_OF_DOTS; ++i) {
+        in_arr[i][number_of_column] = out_of_arr[i];
     }
+    return TRUE;
+}
+
+int copy_array(double in_arr[][NUMBER_OF_DOTS], double out_of_arr[][NUMBER_OF_DOTS]) {
+    if (!in_arr)
+        return FALSE;
+    if (!out_of_arr)
+        return FALSE;
+
+    for (int j = 0; j < NUMBER_OF_DOTS; ++j) {
+        memcpy(in_arr[j], out_of_arr[j], NUMBER_OF_DOTS * sizeof(double));
+    }
+    return TRUE;
+}
+
+int calculate_coefficients(double dots[][SIZE_OF_DIMENSIONS], double *arr_of_coefficients) {
+
+    if (!arr_of_coefficients)
+        return FALSE;
+    if (!dots)
+        return FALSE;
+
+    double arr_of_x_coordinates[NUMBER_OF_DOTS][NUMBER_OF_DOTS] = {0};
+    if (!set_arr_of_x_coordinates(arr_of_x_coordinates, dots))
+        return FALSE;
+
+    double arr_of_y_coordinates[NUMBER_OF_DOTS] = {0};
+    if (!set_arr_of_y_coordinates(arr_of_y_coordinates, dots))
+        return FALSE;
+
+    double det_of_init_arr_X = 0;
+    if (!find_determinant(arr_of_x_coordinates, &det_of_init_arr_X))
+        return FALSE;
+
+    /* Проверка на равенство определителя нулю */
+    if (fabs(det_of_init_arr_X) < EPS)
+        return FALSE;
+
+    /* Создание подсчитывающего массива */
+    double arr_count[NUMBER_OF_DOTS][NUMBER_OF_DOTS] = {0};
 
     /* Последовательно считаем корни матричного уравнения */
-    for (i = 0; i < number_of_dots; ++i) {
+    double extra_det = 0;
+    for (int i = 0; i < NUMBER_OF_DOTS; ++i) {
 
-        memcpy(arr_count[i], arr_Y, number_of_dots * sizeof(double));
+        if (!copy_array(arr_count, arr_of_x_coordinates))
+            return FALSE;
+        if (!change_column_to_row_of_arrays(arr_count, arr_of_y_coordinates, i))
+            return FALSE;
 
-        double extra_det = 0;
-        if(find_determinant_3(arr_count, &extra_det)) return 1;
+        extra_det = 0;
+        if (!find_determinant(arr_count, &extra_det))
+            return FALSE;
         arr_of_coefficients[i] = extra_det / det_of_init_arr_X;
 
-        memcpy(arr_count[i], arr_X[i], number_of_dots * sizeof(double));
-
     }
-    return 0;
+    return TRUE;
 }
-int input_number(FILE* inpt, double *input) {
-    if(!inpt) return 1;
-    char c = '\0';
-    int is_minus = 0;
-    int is_fraction = 0;
-    int read_chars = 0;
+
+int is_negative(int read_chars, int input_char) {
+    return (read_chars == 0 && input_char == '-');
+}
+
+int is_fractional(int fraction_flag, int input_char) {
+    return (fraction_flag == 0 && input_char == '.');
+}
+
+int is_digit(int input_char) {
+    return (input_char >= '0' && input_char <= '9');
+}
+
+int read_number(FILE *input_stream, double *inputNumber) {
+    if (!input_stream)
+        return FALSE;
+    if (!inputNumber)
+        return FALSE;
+
+    int input_char = 0;
+    int is_negative_number = 0;
+    int is_fractional_number = 0;
+    int read_correct_chars = 0;
     double real_counter = 0.1;
 
-    if(!input) {
-        return 1;
-    } else {
-        *input = 0;
-    }
-    while (c = fgetc(inpt), c != ' ' && c != EOF && c != '\n') {
-        /* Если символы не были прочитаны и сразу попался минус, значит число отрицательное */
-        if (read_chars == 0 && c == '-') {
-            is_minus++;
-            continue;
-        }
-        /* Если первый раз встретили точку, то число дробное */
-        if (c == '.' && is_fraction == 0) {
-            is_fraction++;
-            continue;
-        }
-        /* Если встретились посторонние символы, то следует повторить ввод */
-        if (!(c >= '0' && c <= '9')) {
-            do{c = fgetc(inpt);
-            }
-            while (c != '\n' && c != EOF); // Вычищаем буфер
-            return 1;
-        }
+    while (input_char = fgetc(input_stream), input_char != ' ' && input_char != EOF && input_char != '\n') {
+        if (is_negative(read_correct_chars, input_char)) {
 
-        /* Проверяем не началась ли дробная часть и в зависимости от этого "строим" число */
-        if (!is_fraction) {
-            *input = (*input) * 10 + (c - '0');
-        } else if (c != '.') {
-            *input += (c - '0') * real_counter;
-            real_counter *= 0.1;
+            is_negative_number++;
+            read_correct_chars++;
+
+        } else if (is_fractional(is_fractional_number, input_char)) {
+
+            is_fractional_number++;
+            read_correct_chars++;
+
+        } else if (!is_digit(input_char)) {
+
+            do {
+                input_char = fgetc(input_stream);
+            } while (input_char != '\n' && input_char != EOF); // Вычищаем буфер
+            read_correct_chars = 0;
+
+        } else {
+
+            if (!is_fractional_number) {
+
+                *inputNumber = (*inputNumber) * 10 + (input_char - '0');
+
+            } else {
+
+                *inputNumber += (input_char - '0') * real_counter;
+                real_counter *= 0.1;
+
+            }
+            read_correct_chars++;
         }
-        read_chars++;
     }
-    /* Если верных символов не прочитано к данному моменту, значит следует повторить ввод */
-    if (!read_chars) {
-        do{c = fgetc(inpt);
-        }
-        while (c != '\n' && c != EOF); // Вычищаем буфер
-        return 1;
+    if (!read_correct_chars) {
+        do {
+            input_char = fgetc(input_stream);
+        } while (input_char != '\n' && input_char != EOF); // Вычищаем буфер
+        return FALSE;
     }
-    if (is_minus) {
-        *input = (*input) * (-1);
+    if (is_negative_number) {
+        *inputNumber = (*inputNumber) * (-1);
     }
-    return !read_chars;
+    return TRUE;
 }
 
-int input_dots(FILE *inpt, double arr_of_dots[][size_of_dimentions]) {
-    if(!inpt) return 1;
-    if (!arr_of_dots) return 1; // Если NULL, значит ошибка: выходим из функции
+int read_dots(FILE *input_stream, double arr_of_dots[][SIZE_OF_DIMENSIONS]) {
+    if (!input_stream)
+        return FALSE;
+    if (!arr_of_dots)
+        return FALSE;
+
     double buff = 0;
-    int i;
-    for (i = 0; i < 3; i++) {
+    int i = 0;
+
+    while (i < 3) {
         printf("Введите координты точек x%d и y%d: ", i + 1, i + 1);
-        if (!input_number(inpt, &buff)) { // Читаем в буфер и сразу же проверяем, был ли корректен ввод
+        buff = 0;
+
+        if (read_number(input_stream, &buff)) {
+
             arr_of_dots[i][0] = buff;
-            if (!input_number(inpt, &buff)) {
+            buff = 0;
+
+            if (read_number(input_stream, &buff))
                 arr_of_dots[i][1] = buff;
-            } else {
+            else
                 i--;
-            }
-        } else i--; // Если ввод некорректен, то откатываемся на шаг назад и просим ввести снова
+
+        } else
+            i--; // Если ввод некорректен, то откатываемся на шаг назад и просим ввести снова
+        i++;
     }
-    return 0;
+    return TRUE;
 }

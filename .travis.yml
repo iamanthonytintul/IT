@@ -1,6 +1,6 @@
 sudo:     required  # используем Virtual Machine
 
-language: cpp
+language: c
 
 os:
     - linux
@@ -31,16 +31,3 @@ script:
     - gcovr -r ../ -e '..*/gtest/'
     - cd ../src
     - cppcheck --inconclusive --enable=all --language=c main.c task_one.c
-
-deploy:
-    # выкладываем tagged-коммиты на GitHub Releases:
-    provider:     releases
-    file:         <package-file>
-    skip_cleanup: true
-    overwrite:    true
-
-    api_key:
-        secure:   <encrypted-github-token>
-
-    on:
-        tags:     true
