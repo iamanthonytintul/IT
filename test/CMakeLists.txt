@@ -1,5 +1,7 @@
 file(GLOB tests "${PROJECT_SOURCE_DIR}/test/*_tests/*.cpp")
 list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp")
+list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/functional_tests/functional.cpp")
+list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/stress_tests/stress.cpp")
 file(GLOB sources "${PROJECT_SOURCE_DIR}/src/count_time.c")
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs ${PROJECT_SOURCE_DIR}/src)
