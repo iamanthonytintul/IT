@@ -67,8 +67,8 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
         dyn_lib->free_employees(employees, capacity_of_employees);
     }
 
-    rewind(input_stream);
-    int capacity_of_employees = read_number(input_stream);
+    //rewind(input_stream);
+    /*int capacity_of_employees = read_number(input_stream);
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
@@ -88,7 +88,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
         char_output_static = fgetc(output_static_stream);
         char_output_dynamic = fgetc(output_dynamic_stream);
         EXPECT_EQ(char_output_static, char_output_dynamic);
-    }
+    }*/
 
     fclose(input_stream);
     fclose(output_dynamic_stream);
