@@ -35,7 +35,7 @@ boolean init_pthreads_data(subarray **pthreads_data, FILE *output_stream, employ
     return TRUE;
 }
 
-boolean print_the_most_aged_employees_in_each_position(FILE *output_stream, employee_info **emp, int capacity_of_emp) {
+boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, employee_info **emp, int capacity_of_emp) {
 
     int amount_of_positions = 0;
     char **unique_positions = find_unique_positions(emp, capacity_of_emp, &amount_of_positions);
@@ -58,7 +58,7 @@ boolean print_the_most_aged_employees_in_each_position(FILE *output_stream, empl
     }
 
    int err_flag = FALSE;
-  /*   mark_all_as_unchecked(emp, capacity_of_emp);
+     mark_all_as_unchecked(emp, capacity_of_emp);
     for (int i = 0; i < number_of_threads && !err_flag; i++) {
         err_flag = pthread_create(&(pthreads[i]), NULL, get_the_youngest_in_positions_dynamic, pthreads_data[i]);
         cpu_set_t cpu_set;
@@ -72,14 +72,14 @@ boolean print_the_most_aged_employees_in_each_position(FILE *output_stream, empl
     }
 
     print_employees_in_age(output_stream, emp, capacity_of_emp, unique_positions, amount_of_positions, "YOUNG");
-*/
+
     mark_all_as_unchecked(emp, capacity_of_emp);
     for (int i = 0; i < number_of_threads && !err_flag; i++) {
         err_flag = pthread_create(&(pthreads[i]), NULL, get_the_oldest_in_positions_dynamic, pthreads_data[i]);
-       /* cpu_set_t cpu_set;
+        cpu_set_t cpu_set;
         CPU_ZERO(&cpu_set);
         CPU_SET(i, &cpu_set);
-        pthread_setaffinity_np(pthreads[i], sizeof(cpu_set), &cpu_set);*/
+        pthread_setaffinity_np(pthreads[i], sizeof(cpu_set), &cpu_set);
     }
 
     for (int i = 0; i < number_of_threads; i++) {
@@ -131,7 +131,7 @@ void *get_the_youngest_in_positions_dynamic(void *data) {
 
 void *get_the_oldest_in_positions_dynamic(void *data) {
 
-    /*subarray *pthread_data = (subarray *) data;
+    subarray *pthread_data = (subarray *) data;
 
     int end_index = pthread_data->offset + pthread_data->subarray_size;
 
@@ -156,7 +156,7 @@ void *get_the_oldest_in_positions_dynamic(void *data) {
 
             }
         }
-    }*/
+    }
 
     return NULL;
 }
