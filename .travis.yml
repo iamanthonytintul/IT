@@ -21,6 +21,9 @@ install:
 
 script:
     # скрипт сборки и тестирования проекта:
+    - ls /usr/bin
+    - export CXX=/usr/bin/g++-7
+    - export C=/usr/bin/gcc-7
     - mkdir build
     - cd build
     - cmake ..
