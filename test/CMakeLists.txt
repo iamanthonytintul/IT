@@ -27,7 +27,5 @@ foreach(file ${tests})
             ${file}
             "${PROJECT_SOURCE_DIR}/test/main.cpp")
     target_link_libraries("${name}_tests" gtest gtest_main dynamic_employee_DB static_employee_DB ${CMAKE_DL_LIBS} ${CMAKE_THREAD_LIBS_INIT})
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
     add_test(NAME ${name} COMMAND "${name}_tests")
 endforeach()
