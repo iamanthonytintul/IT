@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(Park_Mail_Ru_IZ2)
-
+set(CMAKE_C_STANDARD 11)
 ##
 ### Test definitions ###
 ##
