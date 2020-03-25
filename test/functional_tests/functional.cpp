@@ -97,7 +97,6 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
     
 
     int capacity_of_employees = read_number(input_stream);
-    fprintf(output_static_stream, "%d ", capacity_of_employees);
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
