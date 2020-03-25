@@ -19,11 +19,6 @@ add_definitions(-DPATH_STRESS_INPUT_HUNDRED_THOUSAND_CASE="${PROJECT_SOURCE_DIR}
         -DPATH_STRESS_OUTPUT_STATIC_LIB="${PROJECT_SOURCE_DIR}/test/test_files/stress_test/output_static"
         -DPATH_STRESS_OUTPUT_DYNAMIC_LIB="${PROJECT_SOURCE_DIR}/test/test_files/stress_test/output_dynamic")
 
-add_definitions(-DPATH_TO_DYNAMIC_LIB="/home/travis/build/iamanthonytintul/IT/build/libdynamic_employee_DB.so")
-foreach(file ${tests})
-    set(name)
-    get_filename_component(name ${file} NAME_WE)
-    add_executable("${name}_tests" ${file} ${PROJECT_SOURCE_DIR}/test/main.cpp)
-    target_link_libraries("${name}_tests" gtest_main dynamic_employee_DB dl static_employee_DB)
-    add_test(NAME ${name} COMMAND "${name}_tests")
-endforeach()
+add_executable(Google_Tests ${tests})
+target_link_libraries(Google_Tests gtest gtest_main dynamic_employee_DB static_employee_DB ${CMAKE_DL_LIBS} ${CMAKE_THREAD_LIBS_INIT} )
+add_test(NAME Google_Tests COMMAND Google_Tests)
