@@ -98,11 +98,11 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
-        if (employees) {
+        //if (employees) {
             sort_by_surname(employees, capacity_of_employees);
             print_the_most_aged_employees_in_each_position_static(output_static_stream, employees,
                                                                   capacity_of_employees);
-        }
+        //}
         free_employees(employees, capacity_of_employees);
     }
 
