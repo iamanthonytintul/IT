@@ -32,7 +32,7 @@ protected:
     Functional dyn_lib{};
 };
 
-
+/*
 TEST_F(Functional_test, HandlesFirstRegularCase) {
 
     FILE *input_stream = fopen(PATH_FUNCTIONAL_INPUT_FIRST_REGULAR_CASE, "r");
@@ -83,7 +83,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     fclose(output_dynamic_stream);
     fclose(output_static_stream);
 }
-
+*/
 TEST_F(Functional_test, HandlesSecondRegularCase) {
 
     FILE *input_stream = fopen(PATH_FUNCTIONAL_INPUT_SECOND_REGULAR_CASE, "r");
@@ -95,14 +95,16 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
     EXPECT_TRUE(output_dynamic_stream != NULL);
 
     int capacity_of_employees = read_number(input_stream);
+    fprintf(output_static_stream, "%d ", capacity_of_employees);
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
-
-        //if (employees) {
-            sort_by_surname(employees, capacity_of_employees);
+	if (employees) {
+            fprintf(output_static_stream, " HERE ");
+	    sort_by_surname(employees, capacity_of_employees);
             print_the_most_aged_employees_in_each_position_static(output_static_stream, employees,
                                                                   capacity_of_employees);
-        //}
+        }
+	fprintf(output_static_stream, " HERE2\n");
         free_employees(employees, capacity_of_employees);
     }
 
