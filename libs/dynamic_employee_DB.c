@@ -133,11 +133,11 @@ void *get_the_oldest_in_positions_dynamic(void *data) {
 
     subarray *pthread_data = (subarray *) data;
 
-    int end_index = pthread_data->offset + pthread_data->subarray_size;
+    /*int end_index = pthread_data->offset + pthread_data->subarray_size;
 
     for (int i = pthread_data->offset; i < end_index; i++) {
 
-        /*pthread_data->the_most_age = INITIAL_VALUE;
+        pthread_data->the_most_age = INITIAL_VALUE;
         for (int j = 0; j < pthread_data->capacity_of_emp; j++) {
             if (strcmp(pthread_data->emp[j]->position, pthread_data->unique_positions[i]) == EQ_STR &&
                 (pthread_data->emp[j]->age > pthread_data->the_most_age ||
@@ -155,8 +155,8 @@ void *get_the_oldest_in_positions_dynamic(void *data) {
                 pthread_data->emp[j]->is_checked = TRUE;
 
             }
-        }*/
-    }
+        }
+    }*/
 
     return NULL;
 }
