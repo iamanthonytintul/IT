@@ -38,7 +38,6 @@ protected:
 
     void TearDown() override {
         dlclose(dyn_lib.library);
-        delete dyn_lib;
     }
 
     Functional dyn_lib{};
