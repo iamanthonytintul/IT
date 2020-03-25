@@ -111,7 +111,7 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
 
         free_employees(employees, capacity_of_employees);
     }
-    rewind(input_stream);
+    /*rewind(input_stream);
 
     capacity_of_employees = read_number(input_stream);
 
@@ -137,7 +137,7 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
         char_output_static = fgetc(output_static_stream);
         char_output_dynamic = fgetc(output_dynamic_stream);
         EXPECT_EQ(char_output_static, char_output_dynamic);
-    }
+    }*/
 
     fclose(input_stream);
     fclose(output_dynamic_stream);
