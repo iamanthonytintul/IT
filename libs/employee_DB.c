@@ -88,7 +88,8 @@ char *read_string(FILE *input_stream) {
     char input_char = '\0';
     int error_flag = FALSE;
 
-    while (input_char = fgetc(input_stream), !error_flag && !is_end_of_string(input_char)) {
+    input_char = fgetc(input_stream);
+    while (!error_flag && !is_end_of_string(input_char)) {
         if (size + 1 >= capacity) {
 
             size_t new_capacity = !capacity ? 1 : capacity * 2;
@@ -113,6 +114,7 @@ char *read_string(FILE *input_stream) {
             input_string[size + 1] = '\0';
             size++;
         }
+        input_char = fgetc(input_stream);
     }
     return input_string;
 }
