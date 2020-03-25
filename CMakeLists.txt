@@ -23,8 +23,8 @@ add_subdirectory(test)
 ##
 ### Source definitions ###
 ##
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage -Wall -Werror -Wpedantic -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage -Wall -Werror -Wpedantic -fPIC")
+set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs)
 

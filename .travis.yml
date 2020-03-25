@@ -21,7 +21,6 @@ install:
 
 script:
     # скрипт сборки и тестирования проекта:
-    - ls /usr/bin
     - export CXX=/usr/bin/g++-7
     - export C=/usr/bin/gcc-7
     - mkdir build
@@ -33,4 +32,4 @@ script:
     - cd ..
     - cppcheck --inconclusive --enable=all --language=c src/*.c libs/*.c
 after_success:
-    - coveralls --root .. --build-root . -E ".*CMakeFiles.*" -E ".*googletest*" --gcov /usr/bin/gcov --gcov-options '\-lp' 
+    - coveralls --root .. --build-root . -E ".*CMakeFiles.*" -E ".*googletest*" -E "include/" -E "src/" -E "test/" --gcov /usr/bin/gcov --gcov-options '\-lp' 
