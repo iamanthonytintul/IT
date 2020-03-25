@@ -18,8 +18,7 @@ public:
 
     boolean (*sort_by_surname)(employee_info **emp, int capacity_of_emp);
 
-    boolean (*print_the_most_aged_employees_in_each_position_dyn)(FILE *input_stream, employee_info **emp,
-                                                              int capacity_of_emp);
+    boolean (*print_the_most_aged_employees_in_each_position_dyn)(FILE *output_stream, employee_info **emp, int capacity_of_emp);
 
     boolean (*free_employees)(employee_info **emp, int capacity_of_emp);
 };
