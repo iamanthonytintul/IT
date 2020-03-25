@@ -2,17 +2,17 @@
 
 extern "C" {
 
-#include <dlfcn.h>
 #include "static_employee_DB.h"
 #include "count_time.h"
 
+#include <dlfcn.h>
 }
 class Functional {
 
 public:
     void *library;
 
-    int (*read_number)(FILE *input_stream);
+    void *(*read_number)(FILE *input_stream);
 
     employee_info **(*read_employees)(FILE *input_stream, int capacity_of_emp);
 
