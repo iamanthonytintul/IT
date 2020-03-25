@@ -36,7 +36,7 @@ boolean init_pthreads_data(subarray **pthreads_data, FILE *output_stream, employ
 }
 
 boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, employee_info **emp, int capacity_of_emp) {
-/*
+
     int amount_of_positions = 0;
     char **unique_positions = find_unique_positions(emp, capacity_of_emp, &amount_of_positions);
 
@@ -56,7 +56,7 @@ boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, 
                             unique_positions, number_of_threads, amount_of_positions)) {
         return FALSE;
     }
-
+/*
    int err_flag = FALSE;
      mark_all_as_unchecked(emp, capacity_of_emp);
     for (int i = 0; i < number_of_threads && !err_flag; i++) {
@@ -87,16 +87,16 @@ boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, 
     }
 
     print_employees_in_age(output_stream, emp, capacity_of_emp, unique_positions, amount_of_positions, "OLD");
-
+*/
     free(pthreads);
     free_pthread_data(pthreads_data, number_of_threads);
     free(unique_positions);
 
 
-    if (err_flag) {
-        return FALSE;
-    }
-*/
+    //if (err_flag) {
+     //   return FALSE;
+    //}
+
     return TRUE;
 }
 
