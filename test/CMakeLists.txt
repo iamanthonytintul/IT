@@ -31,6 +31,6 @@ foreach(file ${tests})
             ${sources}
             ${file}
             "${PROJECT_SOURCE_DIR}/test/main.cpp")
-    target_link_libraries("${name}_tests" gtest gtest_main static_employee_DB employee_DB dynamic_employee_DB)
+    target_link_libraries("${name}_tests" gtest gtest_main dynamic_employee_DB static_employee_DB)
     add_test(NAME ${name} COMMAND "${name}_tests")
 endforeach()

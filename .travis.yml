@@ -5,6 +5,7 @@ os:
 
 compiler:
     - gcc
+    - clang
 
 install:
     # скрипт настройки среды и установки зависимостей:
@@ -19,7 +20,7 @@ script:
     - ctest
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
     - cd ..
-    - cppcheck --inconclusive --enable=all --language=c libs/.c src/.c
+    - cppcheck --inconclusive --enable=all --language=c libs/*.c src/*.c
 after_success:
     - coveralls --root .. --build-root . -E ".*CMakeFiles.*" -E ".*googletest*" --gcov /usr/bin/gcov --gcov-options '\-lp' 
 
