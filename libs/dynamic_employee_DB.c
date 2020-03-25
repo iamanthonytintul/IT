@@ -85,9 +85,9 @@ boolean print_the_most_aged_employees_in_each_position(FILE *output_stream, empl
     for (int i = 0; i < number_of_threads; i++) {
         pthread_join(pthreads[i], NULL);
     }
-
-    print_employees_in_age(output_stream, emp, capacity_of_emp, unique_positions, amount_of_positions, "OLD");
 */
+    print_employees_in_age(output_stream, emp, capacity_of_emp, unique_positions, amount_of_positions, "OLD");
+
     free(pthreads);
     free_pthread_data(pthreads_data, number_of_threads);
     free(unique_positions);
