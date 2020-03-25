@@ -33,10 +33,10 @@ add_executable(static_library_main src/static_library_main.c src/count_time.c)
 add_executable(dynamic_library_main src/dynamic_library_main.c src/count_time.c)
 
 target_link_libraries(static_employee_DB  employee_DB)
-target_link_libraries(dynamic_employee_DB  employee_DB pthread)
+target_link_libraries(dynamic_employee_DB  employee_DB)
 
 target_link_libraries(static_library_main  static_employee_DB )
-target_link_libraries(dynamic_library_main  dynamic_employee_DB dl)
+target_link_libraries(dynamic_library_main  dynamic_employee_DB ${CMAKE_DL_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 
 enable_testing()
 add_subdirectory(test)
