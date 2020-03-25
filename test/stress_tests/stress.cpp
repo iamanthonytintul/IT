@@ -76,8 +76,8 @@ TEST_F(Stress_test, HandlesHundredThousandCase) {
 
         if (employees) {
             dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
-                                                                        capacity_of_employees);
+       //     dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
+         //                                                               capacity_of_employees);
         }
         dyn_lib->free_employees(employees, capacity_of_employees);
     }
@@ -127,8 +127,8 @@ TEST_F(Stress_test, HandlesFiveHundredCase) {
 
         if (employees) {
             dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
-                                                                        capacity_of_employees);
+         //   dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
+           //                                                          capacity_of_employees);
         }
         dyn_lib->free_employees(employees, capacity_of_employees);
     }
