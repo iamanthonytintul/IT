@@ -134,6 +134,7 @@ fprintf(output_stream, " HERE4 ");
         return FALSE;
     }
 fprintf(output_stream, " HERE5\n");
+    
     int err_flag = FALSE;
 	
     mark_all_as_unchecked(emp, capacity_of_emp);
@@ -141,9 +142,7 @@ fprintf(output_stream, " HERE5\n");
     for (int i = 0; i < number_of_threads && !err_flag; i++) {
 
 	if ((err_flag = pthread_create( &(pthreads[i]), NULL, get_the_youngest_in_positions_dynamic, pthreads_data[i])) != 0) {
-            fprintf(output_stream, "pthread_create failed with i = %d. errno = %d, %s\n",
-                i, errno, strerror(errno));
-            n = i; /* Don't call join with uninitialised data */
+            fprintf(output_stream, "pthread_create failed with i = %d. errno = %d, %s\n", i, err_flag, strerror(err_flag));
             break;
         }
         cpu_set_t cpu_set;
@@ -152,11 +151,11 @@ fprintf(output_stream, " HERE5\n");
         pthread_setaffinity_np(pthreads[i], sizeof(cpu_set), &cpu_set);
     }
 
-	if(errflag == 0 ){
-    for (int i = 0; i < number_of_threads; i++) {
-        pthread_join(pthreads[i], NULL);
+    if(err_flag == 0 ){
+        for (int i = 0; i < number_of_threads; i++) {
+            pthread_join(pthreads[i], NULL);
+        }
     }
-}
 
     print_employees_in_age(output_stream, emp, capacity_of_emp, unique_positions, amount_of_positions, "YOUNG");
 
