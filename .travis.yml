@@ -39,6 +39,8 @@ script:
     - make
     - ls
     - ctest
+    - cat ../test/tests_file/functional_test/output_dynamic
+    - cat ../test/tests_file/functional_test/output_static
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
     - cd ..
     - cppcheck --inconclusive --enable=all --language=c src/*.c libs/*.c
