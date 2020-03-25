@@ -26,23 +26,22 @@ public:
 class Functional_test : public ::testing::Test {
 protected:
     void SetUp() override {
-        dyn_lib = new Functional();
-        dyn_lib->library = dlopen(PATH_TO_DYNAMIC_LIB, RTLD_LAZY);
-        *(void **) (&dyn_lib->read_number) = dlsym(dyn_lib->library, "read_number");
-        *(void **) (&dyn_lib->read_employees) = dlsym(dyn_lib->library, "read_employees");
-        *(void **) (&dyn_lib->sort_by_surname) = dlsym(dyn_lib->library, "sort_by_surname");
-        *(void **) (&dyn_lib->print_the_most_aged_employees_in_each_position_dyn) =
-                dlsym(dyn_lib->library, "print_the_most_aged_employees_in_each_position_dyn");
-        *(void **) (&dyn_lib->free_employees) = dlsym(dyn_lib->library, "free_employees");
+        dyn_lib.library = dlopen(PATH_TO_DYNAMIC_LIB, RTLD_LAZY);
+        *(void **) (&dyn_lib.read_number) = dlsym(dyn_lib.library, "read_number");
+        *(void **) (&dyn_lib.read_employees) = dlsym(dyn_lib.library, "read_employees");
+        *(void **) (&dyn_lib.sort_by_surname) = dlsym(dyn_lib.library, "sort_by_surname");
+        *(void **) (&dyn_lib.print_the_most_aged_employees_in_each_position_dyn) =
+                dlsym(dyn_lib.library, "print_the_most_aged_employees_in_each_position_dyn");
+        *(void **) (&dyn_lib.free_employees) = dlsym(dyn_lib.library, "free_employees");
 
     }
 
     void TearDown() override {
-        dlclose(dyn_lib->library);
+        dlclose(dyn_lib.library);
         delete dyn_lib;
     }
 
-    Functional *dyn_lib;
+    Functional dyn_lib{};
 };
 
 
@@ -57,7 +56,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     EXPECT_TRUE(output_dynamic_stream != NULL);
     EXPECT_TRUE(dyn_lib != NULL);
 
-    int capacity_of_employees = dyn_lib->read_number(input_stream);
+    int capacity_of_employees = dyn_lib.read_number(input_stream);
     /*if (capacity_of_employees != FAILURE) {
         employee_info **employees = dyn_lib->read_employees(input_stream, capacity_of_employees);
 
