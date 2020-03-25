@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.1)
 
 project(Park_Mail_Ru_IZ2)
 
@@ -23,8 +23,8 @@ add_subdirectory(test)
 ##
 ### Source definitions ###
 ##
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -Wall -Werror -Wpedantic -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage ")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage -Wall -Werror -Wpedantic -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs)
 
