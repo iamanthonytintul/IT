@@ -37,6 +37,7 @@ script:
     - cd build
     - cmake ..
     - make
+    - ls
     - ctest
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
     - cd ..
