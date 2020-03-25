@@ -26,6 +26,6 @@ foreach(file ${tests})
             ${sources}
             ${file}
             "${PROJECT_SOURCE_DIR}/test/main.cpp")
-    target_link_libraries("${name}_tests" gtest gtest_main dynamic_employee_DB static_employee_DB ${CMAKE_DL_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+    target_link_libraries("${name}_tests" gtest gtest_main dynamic_employee_DB pthread static_employee_DB dl)
     add_test(NAME ${name} COMMAND "${name}_tests")
 endforeach()
