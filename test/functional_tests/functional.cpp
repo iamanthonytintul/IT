@@ -12,7 +12,7 @@ class Functional {
 public:
     void *library;
 
-    void *(*read_number)(FILE *input_stream);
+    int (*read_number)(FILE *input_stream);
 
     employee_info **(*read_employees)(FILE *input_stream, int capacity_of_emp);
 
