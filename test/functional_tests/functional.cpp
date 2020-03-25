@@ -95,7 +95,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     fclose(output_static_stream);
 }
 
-TEST_F(Functional_test, HandlesSecondRegularCase) {
+/*TEST_F(Functional_test, HandlesSecondRegularCase) {
 
     FILE *input_stream = fopen(PATH_FUNCTIONAL_INPUT_SECOND_REGULAR_CASE, "r");
     FILE *output_static_stream = fopen(PATH_FUNCTIONAL_OUTPUT_STATIC_LIB, "w+");
@@ -145,4 +145,5 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
     fclose(output_dynamic_stream);
     fclose(output_static_stream);
 }
+*/
 
