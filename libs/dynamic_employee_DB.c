@@ -131,9 +131,9 @@ void *get_the_youngest_in_positions_dynamic(void *data) {
 
 void *get_the_oldest_in_positions_dynamic(void *data) {
 
-    subarray *pthread_data = (subarray *) data;
+    /*subarray *pthread_data = (subarray *) data;
 
-    /*int end_index = pthread_data->offset + pthread_data->subarray_size;
+    int end_index = pthread_data->offset + pthread_data->subarray_size;
 
     for (int i = pthread_data->offset; i < end_index; i++) {
 
