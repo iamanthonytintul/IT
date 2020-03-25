@@ -1,5 +1,5 @@
 file(GLOB tests "${PROJECT_SOURCE_DIR}/test/*_tests/*.cpp")
-list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp")
+list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp" "${PROJECT_SOURCE_DIR}/test/stress_tests/stress.cpp")
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs)
 
