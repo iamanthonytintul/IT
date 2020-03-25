@@ -55,7 +55,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     EXPECT_TRUE(input_stream != NULL);
     EXPECT_TRUE(output_static_stream != NULL);
     EXPECT_TRUE(output_dynamic_stream != NULL);
-
+    EXPECT_TRUE(dyn_lib != NULL);
 
     /*int capacity_of_employees = dyn_lib->read_number(input_stream);
     if (capacity_of_employees != FAILURE) {
