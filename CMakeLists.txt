@@ -15,7 +15,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} --build .
 add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
         ${CMAKE_BINARY_DIR}/googletest-build)
 
-add_definitions(-DPATH_TO_DYNAMIC_LIB="${CMAKE_BINARY_DIR}/libdynamic_employee_DB.so")
+add_definitions(-DPATH_TO_DYNAMIC_LIB="${PROJECT_SOURCE_DIR}/build/libdynamic_employee_DB.so")
 
 enable_testing()
 add_subdirectory(test)
