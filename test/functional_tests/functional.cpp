@@ -13,16 +13,8 @@ class Functional {
 public:
     void *library;
 
-    int (*read_number)(FILE *input_stream);
-
-    employee_info **(*read_employees)(FILE *input_stream, int capacity_of_emp);
-
-    boolean (*sort_by_surname)(employee_info **emp, int capacity_of_emp);
-
     boolean (*print_the_most_aged_employees_in_each_position_dyn)(FILE *input_stream, employee_info **emp,
                                                                   int capacity_of_emp);
-
-    boolean (*free_employees)(employee_info **emp, int capacity_of_emp);
 };
 
 class Functional_test : public ::testing::Test {

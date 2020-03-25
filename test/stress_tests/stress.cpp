@@ -12,38 +12,24 @@ class Stress {
 public:
     void *library;
 
-    int (*read_number)(FILE *input_stream);
-
-    employee_info **(*read_employees)(FILE *input_stream, int capacity_of_emp);
-
-    boolean (*sort_by_surname)(employee_info **emp, int capacity_of_emp);
-
     boolean (*print_the_most_aged_employees_in_each_position_dyn)(FILE *input_stream, employee_info **emp,
                                                                   int capacity_of_emp);
-
-    boolean (*free_employees)(employee_info **emp, int capacity_of_emp);
 };
 
 class Stress_test : public ::testing::Test {
 protected:
     void SetUp() {
-        dyn_lib = new Stress();
-        dyn_lib->library = dlopen(PATH_TO_DYNAMIC_LIB, RTLD_LAZY);
-        *(void **) (&dyn_lib->read_number) = dlsym(dyn_lib->library, "read_number");
-        *(void **) (&dyn_lib->read_employees) = dlsym(dyn_lib->library, "read_employees");
-        *(void **) (&dyn_lib->sort_by_surname) = dlsym(dyn_lib->library, "sort_by_surname");
-        *(void **) (&dyn_lib->print_the_most_aged_employees_in_each_position_dyn) =
-                dlsym(dyn_lib->library, "print_the_most_aged_employees_in_each_position_dyn");
-        *(void **) (&dyn_lib->free_employees) = dlsym(dyn_lib->library, "free_employees");
+        dyn_lib.library = dlopen(PATH_TO_DYNAMIC_LIB, RTLD_LAZY);
+        *(void **) (&dyn_lib.print_the_most_aged_employees_in_each_position_dyn) =
+                dlsym(dyn_lib.library, "print_the_most_aged_employees_in_each_position_dyn");
 
     }
 
     void TearDown() {
-        dlclose(dyn_lib->library);
-        delete dyn_lib;
+        dlclose(dyn_lib.library);
     }
 
-    Stress *dyn_lib;
+    Stress dyn_lib{};
 };
 
 TEST_F(Stress_test, HandlesHundredThousandCase) {
@@ -70,16 +56,16 @@ TEST_F(Stress_test, HandlesHundredThousandCase) {
 
     rewind(input_stream);
 
-    capacity_of_employees = dyn_lib->read_number(input_stream);
+    capacity_of_employees = read_number(input_stream);
     if (capacity_of_employees != FAILURE) {
-        employee_info **employees = dyn_lib->read_employees(input_stream, capacity_of_employees);
+        employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
         if (employees) {
-            dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
+            sort_by_surname(employees, capacity_of_employees);
+            dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
                                                                         capacity_of_employees);
         }
-        dyn_lib->free_employees(employees, capacity_of_employees);
+        free_employees(employees, capacity_of_employees);
     }
 
     rewind(output_static_stream);
@@ -121,16 +107,16 @@ TEST_F(Stress_test, HandlesFiveHundredCase) {
 
     rewind(input_stream);
 
-    capacity_of_employees = dyn_lib->read_number(input_stream);
+    capacity_of_employees = read_number(input_stream);
     if (capacity_of_employees != FAILURE) {
-        employee_info **employees = dyn_lib->read_employees(input_stream, capacity_of_employees);
+        employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
         if (employees) {
-            dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
-                                                                     capacity_of_employees);
+            sort_by_surname(employees, capacity_of_employees);
+            dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
+                                                                        capacity_of_employees);
         }
-        dyn_lib->free_employees(employees, capacity_of_employees);
+        free_employees(employees, capacity_of_employees);
     }
 
     rewind(output_static_stream);
