@@ -2,10 +2,9 @@
 
 extern "C" {
 
-#include <dlfcn.h>
 #include "static_employee_DB.h"
 #include "count_time.h"
-
+#include <dlfcn.h>
 }
 
 class Functional {
@@ -48,11 +47,11 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
-        if (employees) {
+        //if (employees) {
             sort_by_surname(employees, capacity_of_employees);
             dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
                                                                        capacity_of_employees);
-        }
+        //}
         free_employees(employees, capacity_of_employees);
     }
 
