@@ -129,7 +129,7 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
     while (char_output_static != EOF || char_output_dynamic != EOF) {
         char_output_static = fgetc(output_static_stream);
         char_output_dynamic = fgetc(output_dynamic_stream);
-        EXPECT_EQ(char_output_static, char_output_dynamic);
+        ASSERT_EQ(char_output_static, char_output_dynamic);
     }
 
     fclose(input_stream);
