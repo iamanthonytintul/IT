@@ -77,7 +77,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
         if (employees) {
             sort_by_surname(employees, capacity_of_employees);
             //print_the_most_aged_employees_in_each_position_static(output_static_stream, employees,
-                                                                  capacity_of_employees);
+                                                               //   capacity_of_employees);
         }
         free_employees(employees, capacity_of_employees);
     }
