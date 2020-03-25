@@ -62,8 +62,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
 
         if (employees) {
             dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
-                                                                    capacity_of_employees);
+           // dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees, capacity_of_employees);
         }
         dyn_lib->free_employees(employees, capacity_of_employees);
     }
@@ -75,8 +74,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
 
         if (employees) {
             sort_by_surname(employees, capacity_of_employees);
-            print_the_most_aged_employees_in_each_position_static(output_static_stream, employees,
-                                                                  capacity_of_employees);
+            print_the_most_aged_employees_in_each_position_static(output_static_stream, employees, capacity_of_employees);
         }
         free_employees(employees, capacity_of_employees);
     }
@@ -127,7 +125,7 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
 
         if (employees) {
             dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees, capacity_of_employees);
+          //  dyn_lib->print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees, capacity_of_employees);
         }
         dyn_lib->free_employees(employees, capacity_of_employees);
     }
