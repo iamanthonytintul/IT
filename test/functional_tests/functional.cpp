@@ -25,7 +25,7 @@ public:
 
 class Functional_test : public ::testing::Test {
 protected:
-    void SetUp() {
+    void SetUp() override {
         dyn_lib = new Functional();
         dyn_lib->library = dlopen(PATH_TO_DYNAMIC_LIB, RTLD_LAZY);
         *(void **) (&dyn_lib->read_number) = dlsym(dyn_lib->library, "read_number");
@@ -37,7 +37,7 @@ protected:
 
     }
 
-    void TearDown() {
+    void TearDown() override {
         dlclose(dyn_lib->library);
         delete dyn_lib;
     }
