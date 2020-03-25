@@ -1,5 +1,4 @@
 # IT
-Individual tasks
 [![Build Status](https://travis-ci.com/iamanthonytintul/IT.svg?branch=it2)](https://travis-ci.com/iamanthonytintul/IT)
 [![Coverage Status](https://coveralls.io/repos/github/iamanthonytintul/IT/badge.svg?branch=it2)](https://coveralls.io/github/iamanthonytintul/IT?branch=it2)
 
