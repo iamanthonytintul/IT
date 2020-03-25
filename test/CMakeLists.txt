@@ -19,7 +19,7 @@ add_definitions(-DPATH_STRESS_INPUT_HUNDRED_THOUSAND_CASE="${PROJECT_SOURCE_DIR}
         -DPATH_STRESS_OUTPUT_STATIC_LIB="${PROJECT_SOURCE_DIR}/test/test_files/stress_test/output_static"
         -DPATH_STRESS_OUTPUT_DYNAMIC_LIB="${PROJECT_SOURCE_DIR}/test/test_files/stress_test/output_dynamic")
 
-add_definitions(-DPATH_TO_DYNAMIC_LIB="${CMAKE_BINARY_DIR}/libdynamic_employee_DB.so")
+add_definitions(-DPATH_TO_DYNAMIC_LIB="/home/travis/build/iamanthonytintul/IT/build/libdynamic_employee_DB.so")
 foreach(file ${tests})
     set(name)
     get_filename_component(name ${file} NAME_WE)

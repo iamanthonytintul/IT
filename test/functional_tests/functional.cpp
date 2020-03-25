@@ -57,7 +57,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     EXPECT_TRUE(output_dynamic_stream != NULL);
     EXPECT_TRUE(dyn_lib != NULL);
 
-    printf("%s\n", PATH_TO_DYNAMIC_LIB);
+    int capacity_of_employees = dyn_lib->read_number(input_stream);
     /*if (capacity_of_employees != FAILURE) {
         employee_info **employees = dyn_lib->read_employees(input_stream, capacity_of_employees);
 
@@ -91,6 +91,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
         EXPECT_EQ(char_output_static, char_output_dynamic);
     }*/
 
+    EXPECT_EQ(capacity_of_employees, 10000);
     fclose(input_stream);
     fclose(output_dynamic_stream);
     fclose(output_static_stream);
