@@ -103,10 +103,10 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
         if (employees) {
 
             sort_by_surname(employees, capacity_of_employees);
-
+fprintf(output_dynamic_stream, " HERE6 ");
             dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
                                                                        capacity_of_employees);
-
+fprintf(output_dynamic_stream, " HERE7 \n");
         }
 
         free_employees(employees, capacity_of_employees);

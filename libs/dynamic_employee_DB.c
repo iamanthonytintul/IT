@@ -141,7 +141,7 @@ fprintf(output_stream, " HERE5\n");
     for (int i = 0; i < number_of_threads && !err_flag; i++) {
 
 	if ((err_flag = pthread_create( &(pthreads[i]), NULL, get_the_youngest_in_positions_dynamic, pthreads_data[i])) != 0) {
-            fprintf(stderr, "pthread_create failed with i = %d. errno = %d, %s\n",
+            fprintf(output_stream, "pthread_create failed with i = %d. errno = %d, %s\n",
                 i, errno, strerror(errno));
             n = i; /* Don't call join with uninitialised data */
             break;
