@@ -101,10 +101,11 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
 	if (employees) {
             fprintf(output_static_stream, " HERE ");
 	    sort_by_surname(employees, capacity_of_employees);
-            print_the_most_aged_employees_in_each_position_static(output_static_stream, employees,
-                                                                  capacity_of_employees);
+	    fprintf(output_static_stream, " HERE1 ");
+            print_the_most_aged_employees_in_each_position_static(output_static_stream, employees, capacity_of_employees);
+	    fprintf(output_static_stream, " HERE2 ");
         }
-	fprintf(output_static_stream, " HERE2\n");
+	fprintf(output_static_stream, " HERE3\n");
         free_employees(employees, capacity_of_employees);
     }
 
