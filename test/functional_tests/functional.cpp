@@ -57,20 +57,7 @@ TEST_F(Functional_test, HandlesFirstRegularCase) {
     EXPECT_TRUE(output_static_stream != NULL);
     EXPECT_TRUE(output_dynamic_stream != NULL);
 
-    int capacity_of_employees = dyn_lib->read_number(input_stream);
-    if (capacity_of_employees != FAILURE) {
-        employee_info **employees = dyn_lib->read_employees(input_stream, capacity_of_employees);
-
-        if (employees) {
-            dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position(output_dynamic_stream, employees,
-                                                                    capacity_of_employees);
-        }
-        dyn_lib->free_employees(employees, capacity_of_employees);
-    }
-
-    rewind(input_stream);
-    capacity_of_employees = read_number(input_stream);
+    int capacity_of_employees = read_number(input_stream);
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
@@ -109,20 +96,6 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
         free_employees(employees, capacity_of_employees);
     }
 
-    rewind(input_stream);
-
-    capacity_of_employees = dyn_lib->read_number(input_stream);
-    if (capacity_of_employees != FAILURE) {
-        employee_info **employees = dyn_lib->read_employees(input_stream, capacity_of_employees);
-
-        if (employees) {
-            dyn_lib->sort_by_surname(employees, capacity_of_employees);
-            dyn_lib->print_the_most_aged_employees_in_each_position(output_dynamic_stream, employees, capacity_of_employees);
-        }
-        dyn_lib->free_employees(employees, capacity_of_employees);
-    }
-
-    
 
     fclose(input_stream);
     fclose(output_dynamic_stream);
