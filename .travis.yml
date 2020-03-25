@@ -1,23 +1,35 @@
-sudo:     required  # используем Virtual Machine
-
 language: c
 
-os:
-    - linux
+branches:
+  only:
+    - dev
 
-compiler:
-    - gcc
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: true
+      compiler: gcc
 
-env:
-    # список переменных окружения, влияющих на матрицу сборки:
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+      python: 2.7.7
 
-install:
-    # скрипт настройки среды и установки зависимостей:
-    - source ci/travis/install-linux.sh
+      addons:
+        apt:
+          sources:
+            - deadsnakes
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            - valgrind
+            - cppcheck
+            - gcc-7
+            - g++-7
+            - lcov
+
+before_install:
+  - sudo -H pip install --upgrade requests[security]
+  - sudo apt-get -y install valgrind
+  - pip install --user cpp-coveralls
 
 script:
     # скрипт сборки и тестирования проекта:
