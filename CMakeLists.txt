@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.9)
 
-project(Park_Mail_Ru_IZ2 C CXX)
+project(Park_Mail_Ru_IZ2 C)
 set(CMAKE_C_STANDARD 11)
 ##
 ### Test definitions ###
@@ -20,6 +20,7 @@ add_definitions(-DPATH_TO_DYNAMIC_LIB="${PROJECT_SOURCE_DIR}/build/libdynamic_em
 enable_testing()
 add_subdirectory(test)
 
+
 ##
 ### Source definitions ###
 ##
@@ -30,7 +31,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs)
 
 add_library(employee_DB STATIC libs/employee_DB.c)
 add_library(static_employee_DB STATIC libs/static_employee_DB.c)
-add_library(dynamic_employee_DB SHARED libs/dynamic_employee_DB.c)
+add_library(dynamic_employee_DB MODULE libs/dynamic_employee_DB.c)
 
 add_executable(static_library_main src/static_library_main.c src/count_time.c)
 add_executable(dynamic_library_main src/dynamic_library_main.c src/count_time.c)
@@ -40,3 +41,4 @@ target_link_libraries(static_employee_DB employee_DB)
 
 target_link_libraries(static_library_main static_employee_DB)
 target_link_libraries(dynamic_library_main dynamic_employee_DB dl)
+
