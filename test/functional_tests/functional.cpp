@@ -102,14 +102,14 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
 
         if (employees) {
-                fprintf(output_static_stream, " HERE ");
+
             sort_by_surname(employees, capacity_of_employees);
-	    fprintf(output_static_stream, " HERE1 ");
+
             dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
                                                                        capacity_of_employees);
- fprintf(output_static_stream, " HERE2 ");
+
         }
-	fprintf(output_static_stream, " HERE3\n");
+
         free_employees(employees, capacity_of_employees);
     }
     rewind(input_stream);

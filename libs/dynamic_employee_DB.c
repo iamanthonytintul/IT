@@ -37,7 +37,7 @@ boolean init_pthreads_data(subarray **pthreads_data, FILE *output_stream, employ
 
 boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, employee_info **emp, int capacity_of_emp) {
 
-    /*int amount_of_positions = 0;
+    int amount_of_positions = 0;
     char **unique_positions = find_unique_positions(emp, capacity_of_emp, &amount_of_positions);
 
     if (!unique_positions) {
@@ -96,7 +96,7 @@ boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, 
     if (err_flag) {
         return FALSE;
     }
-*/
+
     return TRUE;
 }
 
