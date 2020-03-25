@@ -17,7 +17,5 @@ int read_number(FILE *input_stream);
 
 boolean free_employees(employee_info **emp, int capacity_of_emp);
 
-boolean print_employees(FILE* output_stream, employee_info **emp, int capacity_of_emp);
-
 boolean print_employees_in_age(FILE *output_stream, employee_info **emp, int capacity_of_emp,
-                               char **unique_positions, int amount_of_unique_positions, char *age_gradation);
+                               char **unique_positions, int amount_of_unique_positions, int age_gradation);

@@ -1,7 +1,8 @@
 file(GLOB tests "${PROJECT_SOURCE_DIR}/test/*_tests/*.cpp")
-list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp" "${PROJECT_SOURCE_DIR}/test/stress_tests/stress.cpp")
+list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp")
+file(GLOB sources "${PROJECT_SOURCE_DIR}/src/count_time.c")
 
-include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs)
+include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/libs ${PROJECT_SOURCE_DIR}/src)
 
 add_definitions(-DPATH_INPUT_REGULAR_CASE="${PROJECT_SOURCE_DIR}/test/test_files/regular_case/employees"
         -DPATH_INPUT_SAME_SURNAME_CASE="${PROJECT_SOURCE_DIR}/test/test_files/same_surname_case/employees"
@@ -19,6 +20,10 @@ add_definitions(-DPATH_STRESS_INPUT_HUNDRED_THOUSAND_CASE="${PROJECT_SOURCE_DIR}
         -DPATH_STRESS_OUTPUT_STATIC_LIB="${PROJECT_SOURCE_DIR}/test/test_files/stress_test/output_static"
         -DPATH_STRESS_OUTPUT_DYNAMIC_LIB="${PROJECT_SOURCE_DIR}/test/test_files/stress_test/output_dynamic")
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+set (CMAKE_CXX_STANDARD 11)
+
 foreach(file ${tests})
     set(name)
     get_filename_component(name ${file} NAME_WE)
@@ -26,6 +31,6 @@ foreach(file ${tests})
             ${sources}
             ${file}
             "${PROJECT_SOURCE_DIR}/test/main.cpp")
-    target_link_libraries("${name}_tests" gtest gtest_main dynamic_employee_DB static_employee_DB )
+    target_link_libraries("${name}_tests" gtest gtest_main static_employee_DB employee_DB dynamic_employee_DB)
     add_test(NAME ${name} COMMAND "${name}_tests")
 endforeach()

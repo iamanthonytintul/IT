@@ -20,7 +20,16 @@ TEST(SurnameSort, HandlesRegularCase) {
 
     EXPECT_EQ(sort_by_surname(emp, capacity_of_employees), TRUE);
 
-    EXPECT_TRUE(print_employees(output_stream, emp, capacity_of_employees));
+    for (int j = 0; j < capacity_of_employees; j++) {
+        fprintf(output_stream, "%s\n", emp[j]->name);
+        fprintf(output_stream, "%s\n", emp[j]->surname);
+        fprintf(output_stream, "%d\n", emp[j]->age);
+        fprintf(output_stream, "%c\n", emp[j]->sex);
+        fprintf(output_stream, "%s\n", emp[j]->position);
+        fprintf(output_stream, "%d\n", emp[j]->salary);
+        fprintf(output_stream, "%d\n", emp[j]->experience);
+        fprintf(output_stream, "\n");
+    }
 
     rewind(output_stream);
 
@@ -50,14 +59,23 @@ TEST(SurnameSort, HandlesSameSurnameCase) {
 
     EXPECT_EQ(sort_by_surname(emp, capacity_of_employees), TRUE);
 
-    EXPECT_TRUE(print_employees(output_stream, emp, capacity_of_employees));
+    for (int j = 0; j < capacity_of_employees; j++) {
+        fprintf(output_stream, "%s\n", emp[j]->name);
+        fprintf(output_stream, "%s\n", emp[j]->surname);
+        fprintf(output_stream, "%d\n", emp[j]->age);
+        fprintf(output_stream, "%c\n", emp[j]->sex);
+        fprintf(output_stream, "%s\n", emp[j]->position);
+        fprintf(output_stream, "%d\n", emp[j]->salary);
+        fprintf(output_stream, "%d\n", emp[j]->experience);
+        fprintf(output_stream, "\n");
+    }
 
     rewind(input_stream);
     rewind(output_stream);
 
     int char_output = '\0';
     int char_input = '\0';
-    while(fgetc(input_stream) != '\n');
+    while (fgetc(input_stream) != '\n');
 
     do {
         EXPECT_EQ(char_output, char_input);

@@ -1,46 +1,25 @@
 language: c
 
-branches:
-  only:
-    - it2
+os:
+    - linux
 
-matrix:
-  include:
-    - os: linux
-      dist: trusty
-      sudo: true
-      compiler: gcc
+compiler:
+    - gcc
 
-      python: 2.7.7
-
-      addons:
-        apt:
-          sources:
-            - deadsnakes
-            - ubuntu-toolchain-r-test
-          packages:
-            - cmake
-            - valgrind
-            - cppcheck
-            - gcc-7
-            - g++-7
-
-before_install:
-  - sudo -H pip install --upgrade requests[security]
-  - sudo apt-get -y install valgrind
+install:
+    # скрипт настройки среды и установки зависимостей:
+    - source ci/travis/install-$TRAVIS_OS_NAME.sh
 
 script:
     # скрипт сборки и тестирования проекта:
-    - export CXX=/usr/bin/g++-7
-    - export C=/usr/bin/gcc-7
     - mkdir build
     - cd build
     - cmake ..
     - make
-    - ls
     - ctest
-    - cat ../test/test_files/functional_test/output_dynamic
-    - cat ../test/test_files/functional_test/output_static
     - valgrind --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ctest
     - cd ..
-    - cppcheck --inconclusive --enable=all --language=c src/*.c libs/*.c
+    - cppcheck --inconclusive --enable=all --language=c libs/.c src/.c
+after_success:
+    - coveralls --root .. --build-root . -E ".*CMakeFiles.*" -E ".*googletest*" --gcov /usr/bin/gcov --gcov-options '\-lp' 
+

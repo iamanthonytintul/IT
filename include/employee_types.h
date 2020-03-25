@@ -10,22 +10,26 @@ typedef enum boolean {
     FALSE, TRUE
 } boolean;
 
-typedef struct employee_info {  // The input goes in the following sequence:
-    char *name;                 //  Name
-    char *surname;              //  Surname
-    char *position;             //  Age
-    int salary;                 //  Sex
-    int age;                    //  Position
-    int experience;             //  Salary
-    char sex;                   //  Experience
+enum {
+    YOUNG, OLD
+};
+
+typedef struct employee_info {
+    char *name;
+    char *surname;
+    char *position;
+    int salary;
+    int age;
+    int experience;
+    char sex;
     int is_checked:2;
+    int mark_youngest_in_position:2;
+    int mark_oldest_in_position:2;
 } employee_info;
 
 typedef struct subarray {
-    FILE *output_stream;
     employee_info **emp;
     char **unique_positions;
-    int the_most_age;
     int capacity_of_emp;
     int subarray_size;
     int offset;

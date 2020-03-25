@@ -3,16 +3,14 @@
 #define _GNU_SOURCE
 #define __USE_GNU
 
-boolean init_pthreads_data(subarray **pthreads_data, FILE *output_stream,
+boolean free_pthread_data(subarray **pthread_data, int number_of_threads);
+
+boolean
+get_youngest_oldest_employees_in_positions_dynamic(employee_info **emp, int capacity_of_emp, char **unique_positions,
+                                                   int amount_of_positions);
+
+boolean init_pthreads_data(subarray **pthreads_data,
                            employee_info **emp, int capacity_of_emp, char **unique_positions, int number_of_threads,
                            int amount_of_positions);
-
-boolean print_the_most_aged_employees_in_each_position_dyn(FILE *output_stream, employee_info **emp, int capacity_of_emp);
-
-void *get_the_youngest_in_positions_dynamic(void *data);
-
-void *get_the_oldest_in_positions_dynamic(void *data);
-
-boolean free_pthread_data(subarray **pthread_data, int number_of_threads);
 
 

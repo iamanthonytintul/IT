@@ -15,7 +15,7 @@ TEST(FillStructure, HandlesRegularCase) {
     EXPECT_TRUE(emp != NULL);
 
     int amount_of_positions = 0;
-    char** unique_position = find_unique_positions(emp, capacity_of_employees, &amount_of_positions);
+    char **unique_position = find_unique_positions(emp, capacity_of_employees, &amount_of_positions);
     for (int i = 0; i < amount_of_positions; ++i) {
         mark_position_as_checked(emp, capacity_of_employees, unique_position[i]);
     }
@@ -28,6 +28,7 @@ TEST(FillStructure, HandlesRegularCase) {
     free_employees(emp, capacity_of_employees);
     fclose(input_stream);
 }
+
 TEST(FillStructure, HandlesInvalidCase) {
     FILE *input_stream = fopen(PATH_INPUT_INVALID_CASE, "r");
 

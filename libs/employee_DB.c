@@ -15,9 +15,8 @@ boolean sort_by_surname(employee_info **emp, int capacity_of_emp) {
     if (!emp) {
         return FALSE;
     }
-    int min_surname = 0;
     for (int i = 0; i < capacity_of_emp; i++) {
-        min_surname = i;
+        int min_surname = i;
         for (int j = i + 1; j < capacity_of_emp; j++) {
             if (strcmp(emp[min_surname]->surname, emp[j]->surname) > EQ_STR) {
                 min_surname = j;
@@ -194,6 +193,8 @@ employee_info **read_employees(FILE *input_stream, int capacity_of_emp) {
             if (tmp_emp->experience == FAILURE) {
                 read_employee_flag = FALSE;
             }
+            tmp_emp->mark_oldest_in_position = FALSE;
+            tmp_emp->mark_youngest_in_position = FALSE;
 
             fgetc(input_stream); // Введен разделитель
             emp[i] = tmp_emp;
@@ -229,48 +230,32 @@ boolean free_employees(employee_info **emp, int capacity_of_emp) {
     return TRUE;
 }
 
-boolean print_employees(FILE *output_stream, employee_info **emp, int capacity_of_emp) {
-    if (!emp) {
-        return FALSE;
-    }
-    for (int i = 0; i < capacity_of_emp; i++) {
-        fprintf(output_stream, "%s\n", emp[i]->name);
-        fprintf(output_stream, "%s\n", emp[i]->surname);
-        fprintf(output_stream, "%d\n", emp[i]->age);
-        fprintf(output_stream, "%c\n", emp[i]->sex);
-        fprintf(output_stream, "%s\n", emp[i]->position);
-        fprintf(output_stream, "%d\n", emp[i]->salary);
-        fprintf(output_stream, "%d\n", emp[i]->experience);
-        fprintf(output_stream, "\n");
-    }
-    return TRUE;
-}
-
 boolean print_employees_in_age(FILE *output_stream, employee_info **emp, int capacity_of_emp, char **unique_positions,
-                               int amount_of_unique_positions, char *age_gradation) {
-    if (!output_stream || !emp || !age_gradation || !unique_positions) {
+                               int amount_of_unique_positions, int age_gradation) {
+    if (!output_stream || !emp || !unique_positions) {
         return FALSE;
     }
     for (int i = 0; i < amount_of_unique_positions; ++i) {
-        fprintf(output_stream, "----------THE %sEST in %s position----------\n", age_gradation,
+        fprintf(output_stream, "----------THE %sEST in %s position----------\n",
+                (age_gradation == YOUNG) ? "YOUNG" : "OLD",
                 unique_positions[i]);
 
         for (int j = 0; j < capacity_of_emp; j++) {
-            if (strcmp(emp[j]->position, unique_positions[i]) == EQ_STR && emp[j]->is_checked) {
-
-                fprintf(output_stream, "%s\n", emp[j]->name);
-                fprintf(output_stream, "%s\n", emp[j]->surname);
-                fprintf(output_stream, "%d\n", emp[j]->age);
-                fprintf(output_stream, "%c\n", emp[j]->sex);
-                fprintf(output_stream, "%s\n", emp[j]->position);
-                fprintf(output_stream, "%d\n", emp[j]->salary);
-                fprintf(output_stream, "%d\n", emp[j]->experience);
-                fprintf(output_stream, "\n");
-
+            if (strcmp(emp[j]->position, unique_positions[i]) == EQ_STR) {
+                if ((age_gradation == YOUNG && emp[j]->mark_youngest_in_position == TRUE) ||
+                    (age_gradation == OLD && emp[j]->mark_oldest_in_position == TRUE)) {
+                    fprintf(output_stream, "%s\n", emp[j]->name);
+                    fprintf(output_stream, "%s\n", emp[j]->surname);
+                    fprintf(output_stream, "%d\n", emp[j]->age);
+                    fprintf(output_stream, "%c\n", emp[j]->sex);
+                    fprintf(output_stream, "%s\n", emp[j]->position);
+                    fprintf(output_stream, "%d\n", emp[j]->salary);
+                    fprintf(output_stream, "%d\n", emp[j]->experience);
+                    fprintf(output_stream, "\n");
+                }
             }
         }
         fprintf(output_stream, "---------------------------------------------\n\n");
     }
-
     return TRUE;
 }
