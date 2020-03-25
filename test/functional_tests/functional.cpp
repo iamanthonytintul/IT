@@ -94,32 +94,38 @@ TEST_F(Functional_test, HandlesSecondRegularCase) {
     EXPECT_TRUE(output_static_stream != NULL);
     EXPECT_TRUE(output_dynamic_stream != NULL);
 
+    
+
     int capacity_of_employees = read_number(input_stream);
     fprintf(output_static_stream, "%d ", capacity_of_employees);
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
-	if (employees) {
-            fprintf(output_static_stream, " HERE ");
-	    sort_by_surname(employees, capacity_of_employees);
+
+        if (employees) {
+                fprintf(output_static_stream, " HERE ");
+            sort_by_surname(employees, capacity_of_employees);
 	    fprintf(output_static_stream, " HERE1 ");
-            print_the_most_aged_employees_in_each_position_static(output_static_stream, employees, capacity_of_employees);
-	    fprintf(output_static_stream, " HERE2 ");
+            dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
+                                                                       capacity_of_employees);
+ fprintf(output_static_stream, " HERE2 ");
         }
 	fprintf(output_static_stream, " HERE3\n");
         free_employees(employees, capacity_of_employees);
     }
-
     rewind(input_stream);
 
     capacity_of_employees = read_number(input_stream);
+
     if (capacity_of_employees != FAILURE) {
         employee_info **employees = read_employees(input_stream, capacity_of_employees);
+	if (employees) {
+	
+	    sort_by_surname(employees, capacity_of_employees);
 
-        if (employees) {
-            sort_by_surname(employees, capacity_of_employees);
-            dyn_lib.print_the_most_aged_employees_in_each_position_dyn(output_dynamic_stream, employees,
-                                                                       capacity_of_employees);
+            print_the_most_aged_employees_in_each_position_static(output_static_stream, employees, capacity_of_employees);
+	   
         }
+
         free_employees(employees, capacity_of_employees);
     }
 
