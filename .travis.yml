@@ -2,7 +2,7 @@ language: c
 
 branches:
   only:
-    - dev
+    - it2
 
 matrix:
   include:
